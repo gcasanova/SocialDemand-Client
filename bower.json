@@ -14,6 +14,11 @@
     "qunit": "~1.17.1",
     "bootstrap": "~3.3.4",
     "fontawesome": "~4.3.0",
-    "ember-simple-auth": "0.8.0-beta.3"
-  }
+    "moment": "~2.10.3",
+    "jquery-cookie": "~1.4.1",
+    "ember-simple-auth": "0.8.0",
+    "geoPosition": "*",
+    "select2": "3.5.2"
+  },
+  "devDependencies": {}
 }

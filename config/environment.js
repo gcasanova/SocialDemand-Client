@@ -2,6 +2,10 @@
 
 module.exports = function(environment) {
   var ENV = {
+    contentSecurityPolicy: {
+      'style-src': "'self' 'unsafe-inline'",
+      'connect-src': "'self' ws://localhost:35729 ws://0.0.0.0:35729 http://0.0.0.0:4200/csp-report https://maps.googleapis.com"
+    },
     modulePrefix: 'social-demand-client',
     environment: environment,
     baseURL: '/',
@@ -13,16 +17,18 @@ module.exports = function(environment) {
       }
     },
 
+    'simple-auth': {
+      authorizer: 'simple-auth-authorizer:token'
+    },
+    'simple-auth-token': {
+      refreshLeeway: 86400, // Time in seconds before expiration time for the token to be refreshed
+      serverTokenEndpoint: '/api/auth/token',
+      serverTokenRefreshEndpoint: '/api/auth/refresh'
+    },
+
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    },
-    'simple-auth': {
-        authorizer: 'simple-auth-authorizer:oauth2-bearer',
-        crossOriginWhitelist: ['http://localhost:8080']    
-    },
-    'simple-auth-oauth2': {
-        serverTokenEndpoint: 'http://localhost:8080/oauth/token'
     }
   };
 

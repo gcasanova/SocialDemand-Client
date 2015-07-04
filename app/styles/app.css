@@ -3,8 +3,26 @@ body {
 	margin: 40px auto;
 }
 
+[data-ember-action] {
+  cursor: pointer;
+}
+
 .no-underline {
 	text-decoration: none !important;
+}
+
+.profile-picture {
+   border-radius: 50%;       
+   width: 25px;
+   height: 25px;
+   background: #af7544;
+   color: #fff;
+   text-align: center;
+   margin-right: 1%;
+   padding-right: 5px;
+   padding-left: 5px;
+   padding-top: 1px;
+   padding-bottom: 1px;
 }
 
 /* HEADER */
@@ -47,8 +65,11 @@ body {
 	display: inline;
 }
 
-.login-btn {
+#login-btn {
+	margin: auto;
 	margin-top: 3%;
+	width: 40%;
+	display: block;
 }
 
 .login-form-last-row {
@@ -63,4 +84,38 @@ body {
 
 .sign-form {
 	margin-top: 18%;
+}
+
+#sign-btn {
+	margin: auto;
+	width: 30%;
+	display: block;
+}
+
+/* FORGOTTEN PASSWORD */
+
+.forgotten-form {
+	margin-top: 42%
+}
+
+.reset-form {
+	margin-top: 40%;
+}
+
+#forgotten-btn {
+	margin: auto;
+	width: 30%;
+	display: block;
+}
+
+#reset-btn {
+	margin: auto;
+	display: block;
+}
+
+/* SELECT 2 */
+
+.select2-choice {
+	height: 100% !important;
+	line-height: 30px !important;
 }

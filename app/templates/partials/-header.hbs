@@ -9,7 +9,7 @@
 			<div class="nav text-right">
 				<h4>
 					{{#if session.isAuthenticated}}
-						<a {{ action 'invalidateSession' }}>Logout</a>
+						{{#link-to "login" class="no-underline profile-picture"}}{{nameInitial}}{{/link-to}}<a class="no-underline" {{action 'invalidateSession'}}>Logout</a>
 					{{else}}
 						{{link-to "Log In" "login" class="no-underline"}}
 					{{/if}}

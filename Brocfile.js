@@ -34,4 +34,13 @@ app.import('bower_components/fontawesome/fonts/fontawesome-webfont.woff2', {
 	destDir: 'fonts'
 });
 
+// jquery-cookie
+app.import('bower_components/jquery-cookie/jquery.cookie.js');
+
+// moment
+app.import('bower_components/moment/moment.js');
+
+// select 2
+app.import('bower_components/select2/select2.min.js');
+
 module.exports = app.toTree();
