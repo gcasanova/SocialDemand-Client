@@ -1,121 +1,105 @@
 body {
-	text-align: left;  
-	margin: 40px auto;
+  text-align: left;
+  margin: 40px auto;
 }
-
 [data-ember-action] {
   cursor: pointer;
 }
-
 .no-underline {
-	text-decoration: none !important;
+  text-decoration: none !important;
 }
-
 .profile-picture {
-   border-radius: 50%;       
-   width: 25px;
-   height: 25px;
-   background: #af7544;
-   color: #fff;
-   text-align: center;
-   margin-right: 1%;
-   padding-right: 5px;
-   padding-left: 5px;
-   padding-top: 1px;
-   padding-bottom: 1px;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  background: #af7544;
+  color: #fff;
+  text-align: center;
+  margin-right: 1%;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 
 /* HEADER */
 
 .nav {
-	margin-right: 20%;
+  margin-right: 20%;
 }
-
 .nav-item {
-	font-size: 18px;
-	font-weight: 500;
-	margin-right: 10%;
+  font-size: 18px;
+  font-weight: 500;
+  margin-right: 10%;
 }
-
 .nav-item:last-child {
-    margin-right: 0%;
+  margin-right: 0%;
 }
-
 .navicon {
-	color: #337ab7;
-	margin-left: 2%;
-	margin-right: 2%;
+  color: #337ab7;
+  margin-left: 2%;
+  margin-right: 2%;
 }
-
 .navicon-div {
-	display: inline;
+  display: inline;
 }
 
 /* LOGIN */
 
 .login-form {
-	margin-top: 30%;
+  margin-top: 30%;
 }
-
 .remember {
-	color: #8899a6;
+  color: #8899a6;
 }
-
 .remember-checkbox {
-	display: inline;
+  display: inline;
 }
-
 #login-btn {
-	margin: auto;
-	margin-top: 3%;
-	width: 40%;
-	display: block;
+  margin: auto;
+  margin-top: 3%;
+  width: 40%;
+  display: block;
 }
-
 .login-form-last-row {
-	width: 100%;
+  width: 100%;
 }
-
 .sign-up {
-	float: right;
+  float: right;
 }
 
 /* SIGN UP */
 
 .sign-form {
-	margin-top: 18%;
+  margin-top: 18%;
 }
-
 #sign-btn {
-	margin: auto;
-	width: 30%;
-	display: block;
+  margin: auto;
+  width: 30%;
+  display: block;
 }
 
 /* FORGOTTEN PASSWORD */
 
 .forgotten-form {
-	margin-top: 42%
+  margin-top: 42%
 }
-
 .reset-form {
-	margin-top: 40%;
+  margin-top: 40%;
 }
-
 #forgotten-btn {
-	margin: auto;
-	width: 30%;
-	display: block;
+  margin: auto;
+  width: 30%;
+  display: block;
 }
-
 #reset-btn {
-	margin: auto;
-	display: block;
+  margin: auto;
+  display: block;
 }
 
 /* SELECT 2 */
 
 .select2-choice {
-	height: 100% !important;
-	line-height: 30px !important;
+  height: 100% !important;
+  line-height: 30px !important;
 }

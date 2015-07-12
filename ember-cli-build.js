@@ -27,13 +27,13 @@ module.exports = function(defaults) {
   // font-awesome
   app.import('bower_components/fontawesome/css/font-awesome.min.css');
   app.import('bower_components/fontawesome/fonts/fontawesome-webfont.ttf', {
-  	destDir: 'fonts'
+    destDir: 'fonts'
   });
   app.import('bower_components/fontawesome/fonts/fontawesome-webfont.woff', {
-  	destDir: 'fonts'
+    destDir: 'fonts'
   });
   app.import('bower_components/fontawesome/fonts/fontawesome-webfont.woff2', {
-  	destDir: 'fonts'
+    destDir: 'fonts'
   });
 
   // jquery-cookie

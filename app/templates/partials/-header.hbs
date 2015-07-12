@@ -9,13 +9,15 @@
 			<div class="nav text-right">
 				<h4>
 					{{#if session.isAuthenticated}}
-						{{#link-to "login" class="no-underline profile-picture"}}{{nameInitial}}{{/link-to}}<a class="no-underline" {{action 'invalidateSession'}}>Logout</a>
+						{{#link-to "login" class="no-underline profile-picture" }}{{nameInitial}}{{/link-to}}<a class="no-underline" {{action 'invalidateSession'}}>Logout</a>
 					{{else}}
 						{{link-to "Log In" "login" class="no-underline"}}
 					{{/if}}
 
 					<div class="dropdown navicon-div">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="fa fa-bars navicon text-center"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="fa fa-bars navicon text-center"></span>
+						</a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 							<li>{{link-to "Privacy" "index" class="no-underline"}}</li>
 							<li>{{link-to "Help" "index" class="no-underline"}}</li>
@@ -23,9 +25,8 @@
 							<li>{{link-to "More" "index" class="no-underline"}}</li>
 						</ul>
 					</div>
-				</h4><br>
-				{{link-to "Forum" "index" class="nav-item no-underline"}}
-				{{link-to "Statistics" "index" class="nav-item no-underline"}}
+				</h4>
+				<br> {{link-to "Forum" "index" class="nav-item no-underline"}} {{link-to "Statistics" "index" class="nav-item no-underline"}}
 			</div>
 		</div>
 	</div>

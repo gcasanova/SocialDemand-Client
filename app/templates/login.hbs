@@ -10,12 +10,12 @@
 					{{input id='password' placeholder='Password' type='password' value=password class="form-control"}}
 				</div>
 				<div class="login-form-last-row">
-				 	<div class="checkbox remember-checkbox">
-						<label class="remember"><input type="checkbox" checked> Remember me</label>
+					<div class="checkbox remember-checkbox">
+						<label class="remember">
+							<input type="checkbox" checked> Remember me</label>
 					</div>
 					<span class="separator">·</span>
-					{{link-to "Forgot password?" "forgotten"}}
-					{{link-to "Sign up" "sign" class="sign-up"}}
+					{{link-to "Forgot password?" "forgotten"}} {{link-to "Sign up" "sign" class="sign-up"}}
 				</div>
 				<button id="login-btn" type="submit" class="btn btn-primary">Login</button>
 			</form>
