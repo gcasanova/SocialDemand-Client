@@ -21,6 +21,7 @@ module.exports = function(environment) {
       authorizer: 'simple-auth-authorizer:token'
     },
     'simple-auth-token': {
+      timeFactor: 1000,
       refreshLeeway: 86400, // Time in seconds before expiration time for the token to be refreshed
       serverTokenEndpoint: '/api/auth/token',
       serverTokenRefreshEndpoint: '/api/auth/refresh'
