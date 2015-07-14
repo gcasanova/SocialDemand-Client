@@ -36,9 +36,6 @@ module.exports = function(defaults) {
     destDir: 'fonts'
   });
 
-  // jquery-cookie
-  app.import('bower_components/jquery-cookie/jquery.cookie.js');
-
   // moment
   app.import('bower_components/moment/moment.js');
 
