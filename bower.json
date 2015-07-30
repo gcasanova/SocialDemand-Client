@@ -14,10 +14,11 @@
     "qunit": "~1.17.1",
     "bootstrap": "~3.3.4",
     "fontawesome": "~4.3.0",
-    "moment": "~2.10.3",
     "ember-simple-auth": "0.8.0",
     "geoPosition": "*",
-    "select2": "3.5.2"
+    "select2": "3.5.2",
+    "intl-tel-input": "~6.0.3",
+    "moment-timezone": "~0.4.0"
   },
   "devDependencies": {}
 }

@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div id="header-div" class="container-fluid">
 	<div class="row">
 		<div class="col-xs-6 text-center">
 			<h1>
@@ -9,7 +9,7 @@
 			<div class="nav text-right">
 				<h4>
 					{{#if session.isAuthenticated}}
-						{{#link-to "login" class="no-underline profile-picture" }}{{nameInitial}}{{/link-to}}<a class="no-underline" {{action 'invalidateSession'}}>Logout</a>
+						{{#link-to "upgrade" class="no-underline profile-picture" }}{{nameInitial}}{{/link-to}}<a class="no-underline" {{action 'invalidateSession'}}>Logout</a>
 					{{else}}
 						{{link-to "Log In" "login" class="no-underline"}}
 					{{/if}}

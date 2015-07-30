@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-2" />
+    <div class="col-xs-8">
+
+      <!-- breadcrumb menu with dropdown -->
+      <ul class="breadcrumb">
+        <li><a href="/forum">Spain</a></li>
+        <li class="dropdown">
+          <a href="/forum/region/{{model.region.id}}">{{model.region.name}}</a> <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><b class="caret"></b></a>
+          <ul id="regions-dropdown" class="dropdown-menu">
+            {{#each model.regions as |region|}}
+              <li><a href="forum/region/{{region.id}}"> {{region.name}} </a></li>
+            {{/each}}
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="/forum/region/{{model.region.id}}/province/{{model.province.id}}">{{model.province.name}}</a> <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><b class="caret"></b></a>
+          <ul id="provinces-dropdown" class="dropdown-menu">
+            {{#each model.provinces as |province|}}
+              <li><a href="forum/region/{{model.region.id}}/province/{{province.id}}"> {{province.name}} </a></li>
+            {{/each}}
+          </ul>
+        </li>
+        <li class="dropdown">
+          <span class="current-category">{{model.municipality.name}}</span> <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><b class="caret"></b></a>
+          <ul id="provinces-dropdown" class="dropdown-menu">
+            {{#each model.municipalities as |municipality|}}
+              <li><a href="forum/region/{{model.region.id}}/province/{{model.province.id}}/municipality/{{municipality.id}}"> {{municipality.name}} </a></li>
+            {{/each}}
+          </ul>
+        </li>
+      </ul>
+
+      <!-- forum posts -->
+      {{#if model.posts}}
+        {{#each model.posts as |post|}}
+          {{forum-post post=post}}
+        {{/each}}
+      {{else}}
+        "NO POSTS HERE, BE THE FIRST"
+      {{/if}}
+    </div>
+    <div class="col-xs-2" />
+  </div>
+</div>

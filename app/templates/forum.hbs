@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-2" />
+    <div class="col-xs-8">
+
+      <!-- breadcrumb menu with dropdown -->
+      <ul class="breadcrumb">
+        <li><a href="#">Spain</a></li>
+        <li class="dropdown">
+          Select a region <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><b class="caret"></b></a>
+          <ul id="regions-dropdown" class="dropdown-menu"></ul>
+        </li>
+      </ul>
+
+      <!-- forum posts -->
+      {{#if model}}
+        {{#each model as |post|}}
+          {{forum-post post=post}}
+        {{/each}}
+      {{else}}
+        "NO POSTS HERE, BE THE FIRST"
+      {{/if}}
+    </div>
+    <div class="col-xs-2" />
+  </div>
+</div>

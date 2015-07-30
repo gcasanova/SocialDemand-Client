@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-2" />
+    <div class="col-xs-8">
+
+      <!-- post details -->
+      <div class="col-xs-1" />
+      <div class="col-xs-10 post-inner">
+        <div class="post-content-inner">
+          <p class="post-title">{{model.title}}</p>
+          <p class="post-text">{{model.text}}</p>
+          <p class="post-comments">{{model.commentsCount}} comments</p>
+          <p class="post-author">Submitted by {{model.user.name}} | {{ago model.createdAt}}</p>
+        </div>
+      </div>
+      <div class="col-xs-1" />
+
+    </div>
+    <div class="col-xs-2" />
+  </div>
+
+  {{#each model.comments as |comment|}}
+    <hr class="divider" width="1000">
+
+    <div class="row comment-row">
+      <div class="col-xs-2" />
+      <div class="col-xs-8">
+
+        <!-- post details -->
+        <div class="col-xs-1" />
+        <div class="col-xs-10">
+          <div class="comment-content-inner">
+            <p class="comment-author">{{comment.user.name}} | {{ago comment.createdAt}}</p>
+            <p class="comment-text">{{comment.text}}</p>
+            {{#if comment.hasComments}}
+              <span class="comment-replies">{{comment.commentsCount}} Replies <i class="fa fa-chevron-down"></i></span>
+            {{else}}
+              {{#if comment.hasComment}}
+                <span class="comment-replies">{{comment.commentsCount}} Reply <i class="fa fa-chevron-down"></i></span>
+              {{/if}}
+            {{/if}}
+          </div>
+        </div>
+        <div class="col-xs-1" />
+
+      </div>
+      <div class="col-xs-2" />
+    </div>
+  {{/each}}
+</div>

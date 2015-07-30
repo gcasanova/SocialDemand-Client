@@ -199,6 +199,8 @@ export default Ember.Controller.extend(GeoLocationMixin, {
           alert("Email is already being used, try to login");
         } else if (data.status === 412) {
           alert("We have found your details but email verification is pending, check your email inbox");
+        } else {
+          alert("Something went wrong, please try again later");
         }
       });
     }
