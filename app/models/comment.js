@@ -12,6 +12,6 @@ export default DS.Model.extend({
     return this.get('commentsCount') > 1;
   }.property('commentsCount'),
   hasComment: function () {
-    return this.get('commentsCount') == 1;
+    return this.get('commentsCount') === 1;
   }.property('commentsCount')
 });
