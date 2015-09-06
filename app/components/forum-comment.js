@@ -1,11 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['comment'],
-  comment: null, // passed-in,
+  comment: null, // passed-in
   actions: {
-    showReplies: function (comment) {
-      this.sendAction("action", comment);
+    showReplies: function (comment, isReset) {
+      this.sendAction("showReplies", comment, isReset);
+    },
+    replyComment: function (comment) {
+      this.sendAction("replyComment", comment);
     }
   }
 });

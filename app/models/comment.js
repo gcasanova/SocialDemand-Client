@@ -8,6 +8,9 @@ export default DS.Model.extend({
   parentId: DS.attr('number'),
   commentsCount: DS.attr('number'),
   comments: DS.hasMany('comments', {async: true}),
+  showingChildren: false,
+  showingReplyBox: false,
+  indentation: 0,
   hasComments: function () {
     return this.get('commentsCount') > 1;
   }.property('commentsCount'),

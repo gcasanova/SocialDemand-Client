@@ -1,37 +1,157 @@
 import Ember from 'ember';
+import moment from 'moment';
 
 export default Ember.Controller.extend({
+  needs: ['application'],
+  currentUser: Ember.computed.alias('controllers.application.currentUser'),
+  replyPost: false,
+  showingReplyBox: null,
   actions: {
-    showReplies: function (comment) {
+    showReplies: function (comment, isReset) {
       var _this = this;
-      var model = this.get('model');
-      var comments = model._data.comments;
-      if (Ember.$('#replies-comment-' + comment.id).is(':empty')) {
-        Ember.$.each(comment._data.comments, function (index, value) {
-          this.store.find('comment', value.id).then(function(response) {
-            _this.store.find('user', response._data.user).then(function(response2) {
-                var username = response2._data.name;
-                var html = _this.addComment(response._data, username, 25);
-                comments.insertAt(1, response._data);
-                //Ember.$('#replies-comment-' + comment.id).append(html);
-                Ember.$('#arrow-comment-' + comment.id).removeClass('fa-chevron-down').addClass('fa-chevron-up');
+      var currentUser = this.get('currentUser');
+
+      this.get('model.comments').then(function (comments) {
+        var shown = false;
+        var i = _this.get('model.comments').indexOf(comment) + 1;
+        var j = i; // reference to insert comment of current user first
+
+        // verify if comments are currently shown and update chevron arrow direction
+        _this.store.find('comment', comment._data.comments[0].id).then(function (response) {
+          if (comments.indexOf(response) > -1) {
+            shown = true;
+            comment.set('showingChildren', false);
+          } else {
+            comment.set('showingChildren', true);
+          }
+          _this.removeChildren(comment, comments, _this);
+
+          if (!shown || isReset) {
+            // iterate and insert comments
+            Ember.$.each(comment._data.comments, function (index, value) {
+              _this.store.find('comment', value.id).then(function (response) {
+                response.set('indentation', comment.get('indentation') + 25);
+                if (response._data.user !== currentUser.id) {
+                  comments.insertAt(i, response);
+                } else {
+                  comments.insertAt(j, response);
+                }
+                i++;
+              });
             });
-          });
+          }
+        });
+      });
+    },
+    replyPost: function() {
+      if (this.get('currentUser') !== null) {
+        var comment = this.get("showingReplyBox");
+        if (comment !== null) {
+          comment.set("showingReplyBox", false);
+          this.set("showingReplyBox", null);
+        }
+        this.set('replyPost', true);
+      } else {
+        alert("Please login first");
+      }
+    },
+    replyComment: function(aComment) {
+      if (this.get('currentUser') !== null) {
+        this.set('replyPost', false);
+
+        var comment = this.get("showingReplyBox");
+        if (comment !== null) {
+          comment.set("showingReplyBox", false);
+          this.set("showingReplyBox", null);
+        }
+
+        aComment.set("showingReplyBox", true);
+        this.set("showingReplyBox", aComment);
+      } else {
+        alert("Please login first");
+      }
+    },
+    submit: function (parent, isRootComment) {
+      if (this.get('currentUser') !== null) {
+        var _this = this;
+        var onSuccess = function(comment) {
+          if (isRootComment) {
+            _this.get('model.comments').then(function (comments) {
+              comments.addObject(comment);
+              _this.set('model.commentsCount', _this.get('model.commentsCount') + 1);
+
+              _this.set('replyPost', false);
+              comment = _this.get("showingReplyBox");
+              if (comment !== null) {
+                comment.set("showingReplyBox", false);
+                _this.set("showingReplyBox", null);
+              }
+            });
+          } else {
+            parent.set("commentsCount", parent._data.commentsCount++);
+            parent._data.comments.addObject(comment);
+            _this.send("showReplies", parent, true);
+
+            _this.set('replyPost', false);
+            comment = _this.get("showingReplyBox");
+            if (comment !== null) {
+              comment.set("showingReplyBox", false);
+              _this.set("showingReplyBox", null);
+            }
+          }
+        };
+        var onFail = function(comment) {
+          alert("Something went wrong, please try again later");
+          _this.set('replyPost', false);
+
+          comment = this.get("showingReplyBox");
+          if (comment !== null) {
+            comment.set("showingReplyBox", false);
+            this.set("showingReplyBox", null);
+          }
+        };
+
+        var currentUser = this.get('currentUser');
+        this.store.find('user', currentUser.id).then(function (response) {
+          var user = response;
+          var text = Ember.$('textarea').val();
+          var createdAt = moment().unix() * 1000; // milliseconds
+
+          _this.store.createRecord('comment', {
+            user: user,
+            text: text,
+            createdAt: createdAt,
+            rootComment: isRootComment,
+            parentId: parent._data.id,
+            commentsCount: 0
+          }).save().then(onSuccess, onFail);
         });
       } else {
-        Ember.$('#replies-comment-' + comment.id).empty();
-        Ember.$('#arrow-comment-' + comment.id).removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        alert("Please login first");
+      }
+    },
+    cancel: function () {
+      // hide post reply textarea
+      this.set('replyPost', false);
+
+      var comment = this.get("showingReplyBox");
+      if (comment !== null) {
+        comment.set("showingReplyBox", false);
+        this.set("showingReplyBox", null);
       }
     }
   },
-  addComment: function (comment, username, indentation) {
-    var html = '<hr class="divider" width="1000"><div class="row comment-row"><div class="col-xs-2" /><div class="col-xs-8"><!-- comment --><div class="col-xs-1" /><div class="col-xs-10"><div style="margin-left:' + indentation + 'px" class="comment-content-inner"><p class="comment-author">' + username + ' | ' + moment(comment.createdAt).fromNow() + '</p><p class="comment-text">' + comment.text + '</p>';
-    // if (comment.commentsCount > 1) {
-    //   html += '<span + 'action "showReplies" comment' + class="comment-replies">' + comment.commentsCount + ' Replies <i id="arrow-comment-' + comment.id + '" class="fa fa-chevron-down"></i></span>';
-    // } else if (comment.commentsCount === 1) {
-    //   html += '<span {{action "showReplies" comment}} class="comment-replies">' + comment.commentsCount + ' Reply <i id="arrow-comment-' + comment.id + '" class="fa fa-chevron-down"></i></span>';
-    // }
-    html += '</div></div><div class="col-xs-1" /></div><div class="col-xs-2" /></div>';
-    return html;
+  removeChildren: function (comment, comments, _this) {
+    // iterate and delete comments
+    Ember.$.each(comment._data.comments, function (index, value) {
+      _this.store.find('comment', value.id).then(function (response) {
+        if (response.get('showingChildren')) {
+          _this.removeChildren(response, comments, _this);
+        }
+
+        response.set('showingChildren', false);
+        comments.removeObject(response);
+      });
+    });
   }
 });

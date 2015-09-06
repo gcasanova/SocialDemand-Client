@@ -93,6 +93,9 @@ body {
 .dropdown-menu li {
   display: block;
 }
+.no-slash:before {
+    content: none !important;
+}
 
 /* POST DETAILS */
 
@@ -120,6 +123,34 @@ body {
   cursor: pointer;
   background-color: #e9e9e9;
 }
+.reply-post {
+  margin-bottom: 15px;
+  padding: 8px;
+  background-color: #337ab7;
+  color: #fff;
+}
+.reply-post:hover {
+  cursor: pointer;
+  background-color: #005f8e;
+}
+textarea {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #337ab7;
+}
+textarea[name="new-thread-content"] {
+  height: 300px;
+}
+input {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #337ab7;
+}
 
 /* LOGIN */
 
@@ -131,6 +162,9 @@ body {
 }
 .remember-checkbox {
   display: inline;
+}
+.checkbox input[type=checkbox] {
+  margin-left: -70px !important;
 }
 #login-btn {
   margin: auto;

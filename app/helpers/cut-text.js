@@ -7,5 +7,4 @@ export function cutText(params/*, hash*/) {
     return params[0];
   }
 }
-
 export default Ember.HTMLBars.makeBoundHelper(cutText);

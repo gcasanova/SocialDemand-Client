@@ -5,16 +5,6 @@ export default Ember.Controller.extend({
   needs: ['application'],
   currentUser: Ember.computed.alias('controllers.application.currentUser'),
   showNewThread: false,
-  init: function() {
-    // find all regions
-    this.store.find('region').then(function(response) {
-      var html = '';
-      response.forEach(function(region) {
-        html += '<li><a href="forum/region/' + region._data.id + '">' + region._data.name + '</a></li>';
-      });
-      Ember.$('#regions-dropdown').html(html);
-    });
-  },
   actions: {
     newThread: function() {
       if (this.get('currentUser') !== null) {
@@ -30,7 +20,7 @@ export default Ember.Controller.extend({
       if (this.get('currentUser') !== null) {
         var _this = this;
         var onSuccess = function(post) {
-          _this.get('model').insertAt(0, post);
+          _this.get('model.posts').insertAt(0, post);
           _this.set('showNewThread', false);
         };
         var onFail = function() {
@@ -41,14 +31,15 @@ export default Ember.Controller.extend({
         var currentUser = this.get('currentUser');
         this.store.find('user', currentUser.id).then(function (response) {
           var user = response;
+          var locationId = _this.get('model.province.id');
           var title = Ember.$('input[name="new-thread-title"]').val();
           var text = Ember.$('textarea[name="new-thread-content"]').val();
           var createdAt = moment().unix() * 1000; // milliseconds
 
           _this.store.createRecord('post', {
             user: user,
-            locationId: 1,
-            locationType: "NATIONAL",
+            locationId: locationId,
+            locationType: "PROVINCE",
             title: title,
             text: text,
             createdAt: createdAt,

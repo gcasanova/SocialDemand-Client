@@ -1,11 +1,19 @@
-<div class="comment-content-inner">
-  <p class="comment-author">{{comment.user.name}} | {{ago comment.createdAt}}</p>
+<div style="margin-left:{{comment.indentation}}px" class="comment-content-inner">
+  <p class="comment-author">{{comment.user.name}} | {{ago comment.createdAt}} <i {{action 'replyComment' comment}} class="comment-replies fa fa-reply"></i></p>
   <p class="comment-text">{{comment.text}}</p>
   {{#if comment.hasComments}}
-    <span {{action 'showReplies' comment}} class="comment-replies">{{comment.commentsCount}} Replies <i id="arrow-comment-{{comment.id}}" class="fa fa-chevron-down"></i></span>
+    {{#if comment.showingChildren}}
+      <span {{action 'showReplies' comment false}} class="comment-replies">{{comment.commentsCount}} Replies <i id="arrow-comment-{{comment.id}}" class="fa fa-chevron-up"></i></span>
+    {{else}}
+      <span {{action 'showReplies' comment false}} class="comment-replies">{{comment.commentsCount}} Replies <i id="arrow-comment-{{comment.id}}" class="fa fa-chevron-down"></i></span>
+    {{/if}}
   {{else}}
     {{#if comment.hasComment}}
-      <span {{action 'showReplies' comment}} class="comment-replies">{{comment.commentsCount}} Reply <i id="arrow-comment-{{comment.id}}" class="fa fa-chevron-down"></i></span>
+      {{#if comment.showingChildren}}
+        <span {{action 'showReplies' comment false}} class="comment-replies">{{comment.commentsCount}} Reply <i id="arrow-comment-{{comment.id}}" class="fa fa-chevron-up"></i></span>
+      {{else}}
+        <span {{action 'showReplies' comment false}} class="comment-replies">{{comment.commentsCount}} Reply <i id="arrow-comment-{{comment.id}}" class="fa fa-chevron-down"></i></span>
+      {{/if}}
     {{/if}}
   {{/if}}
 </div>
