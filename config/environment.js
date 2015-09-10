@@ -2,9 +2,11 @@
 
 module.exports = function(environment) {
   var ENV = {
+    host: 'https://ec2-52-16-18-4.eu-west-1.compute.amazonaws.com:8443',
+    //host: 'https://ec2-52-16-18-4.eu-west-1.compute.amazonaws.com:8444',
     contentSecurityPolicy: {
       'style-src': "'self' 'unsafe-inline'",
-      'connect-src': "'self' ws://localhost:35729 ws://0.0.0.0:35729 http://0.0.0.0:4200/csp-report https://maps.googleapis.com http://www.telize.com"
+      'connect-src': "'self' ws://localhost:35729 ws://0.0.0.0:35729 http://0.0.0.0:4200/csp-report https://maps.googleapis.com http://www.telize.com https://localhost:8443 https://ec2-52-16-18-4.eu-west-1.compute.amazonaws.com:8443"
     },
     modulePrefix: 'social-demand-client',
     environment: environment,
@@ -23,13 +25,14 @@ module.exports = function(environment) {
     'simple-auth-token': {
       timeFactor: 1000,
       refreshLeeway: 86400, // Time in seconds before expiration time for the token to be refreshed
-      serverTokenEndpoint: '/api/auth/token',
-      serverTokenRefreshEndpoint: '/api/auth/refresh'
+      serverTokenEndpoint: 'https://ec2-52-16-18-4.eu-west-1.compute.amazonaws.com:8443/api/auth/token',
+      serverTokenRefreshEndpoint: 'https://ec2-52-16-18-4.eu-west-1.compute.amazonaws.com:8443/api/auth/refresh'
     },
 
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+      S3_SECRET_KEY: process.env.S3_SECRET_ACCESS_KEY
     }
   };
 
