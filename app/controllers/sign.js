@@ -17,22 +17,24 @@ export default Ember.Controller.extend(GeoLocationMixin, {
     this._super();
 
     this.get('geolocation').start();
-    this.get('geolocation').getGeoposition().then(function(geoposition) {
-      _this.get('geolocation').stop();
+    Ember.run.later((function() {
+      _this.get('geolocation').getGeoposition().then(function(geoposition) {
+        _this.get('geolocation').stop();
 
-      Ember.$.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=41.4031163,2.181871', {
-        latlng: geoposition.coords.latitude + "," + geoposition.coords.longitude
-      }).then(function(data) {
-        var addressLength = data.results[0].address_components.length;
-        _this.findMunicipality(geoposition, data.results[0].address_components, 0, addressLength - 1, _this);
+        Ember.$.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=41.4031163,2.181871', {
+          latlng: geoposition.coords.latitude + "," + geoposition.coords.longitude
+        }).then(function(data) {
+          var addressLength = data.results[0].address_components.length;
+          _this.findMunicipality(geoposition, data.results[0].address_components, 0, addressLength - 1, _this);
+        }, function() {
+          console.log("Google geolocation query failed");
+          _this.set('isInitialised', true);
+        });
       }, function() {
-        console.log("Google geolocation query failed");
+        console.log("Geolocation blocked!");
         _this.set('isInitialised', true);
       });
-    }, function() {
-      console.log("Geolocation blocked!");
-      _this.set('isInitialised', true);
-    });
+    }), 2000);
   },
   findMunicipality: function(geoposition, values, currentIndex, maxIndex, _this) {
     var value = values[currentIndex];
