@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.Controller.extend({
   resetFailed: false,
@@ -42,7 +43,7 @@ export default Ember.Controller.extend({
           request.setRequestHeader("Email", data.email);
           request.setRequestHeader("Password", data.password);
         },
-        url: '/api/auth/change',
+        url: config.host + '/api/auth/change',
         dataType: 'json',
         contentType: 'application/json'
       }).then(function() {}, function(data) {

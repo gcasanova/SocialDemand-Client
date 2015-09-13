@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.Controller.extend({
   needs: ['application'],
@@ -72,7 +73,7 @@ export default Ember.Controller.extend({
           request.setRequestHeader("Document", document);
           request.setRequestHeader("Mobile", number);
         },
-        url: '/api/auth/upgrade',
+        url: config.host + '/api/auth/upgrade',
         dataType: 'json',
         contentType: 'application/json'
       }).then(function() {}, function(data) {
@@ -110,7 +111,7 @@ export default Ember.Controller.extend({
         beforeSend: function(request) {
           request.setRequestHeader("Verification", verification);
         },
-        url: '/api/auth/upgrade/verification',
+        url: config.host + '/api/auth/upgrade/verification',
         dataType: 'json',
         contentType: 'application/json'
       }).then(function(data) {

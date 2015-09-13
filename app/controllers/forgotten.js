@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.Controller.extend({
   actions: {
@@ -8,7 +9,7 @@ export default Ember.Controller.extend({
 
       Ember.$.ajax({
         type: 'POST',
-        url: '/api/auth/reset?email=' + data.email,
+        url: config.host + '/api/auth/reset?email=' + data.email,
         dataType: 'json',
         contentType: 'application/json'
       }).then(function() {}, function(data) {

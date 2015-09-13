@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from '../config/environment';
 import GeoLocationMixin from 'social-demand-client/mixins/geolocation-mixin';
 
 export default Ember.Controller.extend(GeoLocationMixin, {
@@ -189,7 +190,7 @@ export default Ember.Controller.extend(GeoLocationMixin, {
 
       Ember.$.ajax({
         type: 'POST',
-        url: '/api/auth/signup',
+        url: config.host + '/api/auth/signup',
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify(user)
