@@ -22,7 +22,7 @@ export default Ember.Controller.extend(GeoLocationMixin, {
       _this.get('geolocation').getGeoposition().then(function(geoposition) {
         _this.get('geolocation').stop();
 
-        Ember.$.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=41.4031163,2.181871', {
+        Ember.$.get('https://maps.googleapis.com/maps/api/geocode/json?', {
           latlng: geoposition.coords.latitude + "," + geoposition.coords.longitude
         }).then(function(data) {
           var addressLength = data.results[0].address_components.length;

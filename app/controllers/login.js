@@ -12,6 +12,7 @@ export default Ember.Controller.extend({
       this.get('session').authenticate(authenticator, credentials).then(function() {
         var token = JSON.parse(atob(_this.get('session').store._lastData.secure.token.split(".")[1]));
         var user = JSON.parse(token.sub.toString().replace(/\\/g, ''));
+        _this.set("currentUserLocation", null);
         _this.set('currentUser', user);
         _this.set('password', '');
         _this.transitionToRoute('index');

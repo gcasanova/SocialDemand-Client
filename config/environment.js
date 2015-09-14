@@ -2,11 +2,10 @@
 
 module.exports = function(environment) {
   var ENV = {
-    host: 'https://ec2-52-16-18-4.eu-west-1.compute.amazonaws.com:8443',
-    //host: 'https://ec2-52-16-18-4.eu-west-1.compute.amazonaws.com:8444',
+    host: 'http://ec2-52-16-18-4.eu-west-1.compute.amazonaws.com:8080',
     contentSecurityPolicy: {
       'style-src': "'self' 'unsafe-inline'",
-      'connect-src': "'self' ws://localhost:35729 ws://0.0.0.0:35729 http://0.0.0.0:4200/csp-report https://maps.googleapis.com http://www.telize.com https://localhost:8443 https://ec2-52-16-18-4.eu-west-1.compute.amazonaws.com:8443"
+      'connect-src': "'self' ws://localhost:35729 ws://0.0.0.0:35729 http://0.0.0.0:4200/csp-report https://maps.googleapis.com http://www.telize.com http://localhost:8080 http://ec2-52-16-18-4.eu-west-1.compute.amazonaws.com:8080"
     },
     modulePrefix: 'social-demand-client',
     environment: environment,
@@ -20,13 +19,14 @@ module.exports = function(environment) {
     },
 
     'simple-auth': {
+      crossOriginWhitelist: ['*'],
       authorizer: 'simple-auth-authorizer:token'
     },
     'simple-auth-token': {
       timeFactor: 1000,
       refreshLeeway: 86400, // Time in seconds before expiration time for the token to be refreshed
-      serverTokenEndpoint: 'https://ec2-52-16-18-4.eu-west-1.compute.amazonaws.com:8443/api/auth/token',
-      serverTokenRefreshEndpoint: 'https://ec2-52-16-18-4.eu-west-1.compute.amazonaws.com:8443/api/auth/refresh'
+      serverTokenEndpoint: 'http://ec2-52-16-18-4.eu-west-1.compute.amazonaws.com:8080/api/auth/token',
+      serverTokenRefreshEndpoint: 'http://ec2-52-16-18-4.eu-west-1.compute.amazonaws.com:8080/api/auth/refresh'
     },
 
     APP: {
