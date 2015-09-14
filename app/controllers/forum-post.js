@@ -89,6 +89,10 @@ export default Ember.Controller.extend({
             });
           } else {
             parent.set("commentsCount", parent._data.commentsCount++);
+
+            if (parent._data.comments == undefined) {
+              parent._data.comments = [];
+            }
             parent._data.comments.addObject(comment);
             _this.send("showReplies", parent, true);
 
