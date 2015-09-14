@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   needs: ['application'],
   currentUser: Ember.computed.alias('controllers.application.currentUser'),
+  currentUserLocation: Ember.computed.alias('controllers.application.currentUserLocation'),
   actions: {
     authenticate: function() {
       var _this = this;
@@ -10,9 +11,11 @@ export default Ember.Controller.extend({
         authenticator = 'simple-auth-authenticator:jwt';
 
       this.get('session').authenticate(authenticator, credentials).then(function() {
+        localStorage.setItem("location", null);
+
         var token = JSON.parse(atob(_this.get('session').store._lastData.secure.token.split(".")[1]));
         var user = JSON.parse(token.sub.toString().replace(/\\/g, ''));
-        _this.set("currentUserLocation", null);
+        _this.set('currentUserLocation', null);
         _this.set('currentUser', user);
         _this.set('password', '');
         _this.transitionToRoute('index');
